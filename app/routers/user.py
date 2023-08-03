@@ -5,7 +5,8 @@ from .. import models, schemas, utils
 
 
 router = APIRouter(
-    prefix="/users"
+    prefix="/users",
+    tags=['Users']
 )
 
 
@@ -28,6 +29,6 @@ def get_user(id: int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"User eith id: {id} does not exits")
+                            detail=f"User with id: {id} does not exits")
 
     return user
